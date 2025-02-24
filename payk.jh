@@ -1,0 +1,652 @@
+enum BrakeSystemType {
+    ABS, EBD, ESP, BAS, DrumBrakes, DiscBrakes
+}
+
+enum CalculationMethod {
+    PercentageOfSales, FixedAmountPerOrder, FixedAmountPerHour, FixedAmountPerKilometer, FixedAmountPerUnit, Combination
+}
+
+enum CalculationType {
+    Linear, Exponential, Logarithmic, Tiered, Percentage, FixedAmount, Combination, Other
+}
+
+enum CommissionType {
+    FixedAmount, Percentage
+}
+
+enum ContractStatus {
+    Draft, Active, Inactive, Terminated, Suspended, Pending
+}
+
+enum ContractType {
+    PartTime, FullTime, Commission, Contractual
+}
+
+enum CourierStatus {
+    Online, Offline, OnMission, OnBreak, Unavailable
+}
+
+enum CourierType {
+    Freelance, Contract, Organizational
+}
+
+enum DaysOfWeek {
+    Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+}
+
+enum DeliveryType {
+    Express, Standard, Scheduled, COD
+}
+
+enum DiscountType {
+    PercentageOff, FixedAmountOff, FreeShipping
+}
+
+enum DocumentType {
+    NationalCard, DrivingLicense, IdentityCard, Passport, OwnershipDocument, VehicleInsurance, VehicleOwnershipDocument, CriminalRecordCheck, Other
+}
+
+enum EducationLevel {
+    BelowDiploma, Diploma, AssociateDegree, BachelorDegree, MasterDegree, Doctorate
+}
+
+enum EmploymentType {
+    Permanent, Contractual, Temporary, PartTime, FullTime, Trainee, Freelancer, Consultant
+}
+
+enum FuelType {
+    Gasoline, Gas, Diesel, Electric, Hybrid, Biofuel, Hydrogen
+}
+
+enum GearboxType {
+    Manual, Automatic, SemiAutomatic, CVT, DCT
+}
+
+enum Gender {
+    Male, Female, Other
+}
+
+enum LicenseStatus {
+    Valid, Expired, Suspended, Revoked, UnderReview, Lost
+}
+
+enum LicenseType {
+    Motorcycle, Car, Truck, Bus, Forklift, Tractor, Other
+}
+
+enum OrderStatus {
+    PendingConfirmation, Confirmed, Preparing, ReadyForPickup, AssignedToCourier, OnRoute, Delivered, CancelledByCustomer, CancelledByBusiness, CancelledBySystem, DeliveryFailed, ReturnedToSender, AwaitingPayment, Paid, Refunded, Disputed
+}
+
+enum PaymentMethod {
+    Cash, OnlinePayment, Wallet, POS, CardToCard, Credit, CashOnDelivery
+}
+
+enum PaymentMethodValueType {
+    FixedAmount, Percentage
+}
+
+enum PaymentPayerType {
+    Sender, Receiver, ThirdParty, System, Unknown
+}
+
+enum PaymentPeriod {
+    Daily, Weekly, Monthly, Quarterly, Yearly, Custom
+}
+
+enum PaymentStatus {
+    Pending, Paid, Failed, Cancelled, Refunded, Refunding, PartiallyPaid, Confirmed
+}
+
+enum PersianDayOfWeek {
+    Shanbeh, Yekshanbeh, Doshanbeh, Seshanbeh, Chaharshanbeh, Panjshanbeh, Jomeh
+}
+
+enum PricingParameterType {
+    WeightPricePerKg, VolumePricePerCubicMeter, StopPrice, NightTimeMultiplier, DistancePricePerKm, BasePrice, FixedDeliveryCost, MaximumCoverageDistance, MinimumDistanceForCalculation, PeakHoursMultiplier, OffPeakHoursMultiplier, InsuranceCost, Other, DiscountPercentage, DiscountFixedAmount, CommissionPercentage, CommissionFixedAmount, AdditionalFees, ExchangeRate, ServiceTypeCost, PaymentMethodCost, VehicleTypeCost, WeatherConditionsFactor, TrafficFactor, DayOfWeekFactor, TimeOfDayFactor, HolidaysFactor, EventsFactor
+}
+
+enum ServiceType {
+    Instant, SameDay, NextDay, ScheduledDelivery, HeavyFreight, VIP, Economy, Other
+}
+
+enum ShipmentStatus {
+    Pending, Processing, Dispatched, InTransit, OutForDelivery, Delivered, FailedDelivery, Returned, Cancelled, Delayed
+}
+
+enum SteeringType {
+    Hydraulic, Electric, ElectroHydraulic
+}
+
+enum TransactionStatus {
+    Successful, Failed, Processing, Pending, Cancelled, Refunded, Reversed, Completed, Unknown
+}
+
+enum TransactionType {
+    Deposit, Withdrawal, OrderPayment, Commission, Refund, Penalty, Bonus, Gift, Other
+}
+
+enum UsageStatus {
+    InUse, Completed, Suspended, Deleted, Inactive, PendingApproval
+}
+
+enum UsageType {
+    OrderDelivery, PassengerTransportation, PackageDelivery, FreightTransportation, MotorcycleDelivery, CarDelivery, PostalService, CleaningServices, RepairServices, EducationalServices
+}
+
+enum UserType {
+    None, Customer, Courier, Employee, Admin, Support, Seller, Business
+}
+
+enum VehicleStatus {
+    Active, Inactive, UnderRepair, Scrapped
+}
+
+enum VehicleType {
+    Motorcycle, Car, Van, Truck, Bicycle, Scooter, Tricycle, Pickup, Other
+}
+
+enum WorkShiftStatus {
+    Started, Ended, Cancelled, Scheduled, InProgress, Suspended, Completed
+}
+
+enum WorkShiftType {
+    Fixed, Rotating, Floating, Daily, Nightly, Weekend, Holiday, Morning, Afternoon, Night, Other
+}
+
+enum DistanceMatrixStatus {
+    Pending, Calculated, Failed, Cached
+}
+
+
+entity Address {
+    street String required maxlength(200)
+    alley String maxlength(200)
+    houseNumber String required maxlength(20)
+    unitNumber String maxlength(20)
+    postalCode String required minlength(10) maxlength(10)  // Pattern removed
+    description String maxlength(500)
+    receiverName String maxlength(100)
+    receiverPhoneNumber String maxlength(20)  // Pattern removed (phone validation can be added later)
+    buildingNumber String maxlength(20)
+    latitude BigDecimal required min(-90) max(90)
+    longitude BigDecimal required min(-180) max(180)
+}
+
+entity Bank {
+    name String required maxlength(100)
+    description String maxlength(500)
+    code String maxlength(20)
+    address String maxlength(200)
+    phone String maxlength(20)  // Pattern removed (phone validation can be added later)
+    website String maxlength(200)  // Pattern removed (URL validation can be added later)
+    email String maxlength(100)  // Pattern removed (email validation can be added later)
+    logoUrl String maxlength(200)
+}
+
+entity Category {
+    name String required maxlength(100)
+    description String maxlength(500)
+    parentCategoryId UUID
+}
+
+entity City {
+    name String required maxlength(100)
+    isCapital Boolean
+    provinceId UUID
+}
+
+entity Courier {
+    nationalCode String required minlength(10) maxlength(10)  // Pattern removed
+    firstName String required maxlength(50)
+    lastName String required maxlength(50)
+    phoneNumber String required maxlength(20)  // Pattern removed (phone validation can be added later)
+    email String required maxlength(100)  // Pattern removed (email validation can be added later)
+    gender Gender required
+    courierType CourierType required
+    cityId UUID required
+    addressId UUID
+    profilePicture String maxlength(200)
+    bio String maxlength(500)
+    courierStatus CourierStatus
+}
+
+entity CourierBankAccount {
+    courierId UUID required
+    bankId UUID required
+    accountNumber String required maxlength(50)
+    branchName String maxlength(100)
+    branchCode String maxlength(20)
+    accountHolderName String required maxlength(100)
+    description String maxlength(500)
+    cardNumber String required minlength(16) maxlength(16)  // Pattern removed
+    shabaNumber String required minlength(24) maxlength(26)  // Pattern removed
+}
+
+entity CourierDocument {
+    courierId UUID required
+    documentName String required maxlength(100)
+    documentType DocumentType required
+    expiryDate LocalDate
+    filePath String maxlength(200)
+    description String maxlength(500)
+    documentNumber String maxlength(50)
+    issueDate LocalDate required
+}
+
+entity CourierEmploymentContract {
+    courierId UUID required
+    contractType ContractType required
+    employmentType EmploymentType required
+    startDate LocalDate required
+    endDate LocalDate
+    baseSalary BigDecimal required
+    benefits String maxlength(500)
+    description String maxlength(500)
+    status ContractStatus required
+}
+
+entity CourierPayment {
+    courierId UUID required
+    amount BigDecimal required
+    paymentMethod PaymentMethod required
+    paymentDate Instant required
+    description String maxlength(500)
+    status PaymentStatus required
+}
+
+entity CourierServiceCommission {
+    courierId UUID required
+    amount BigDecimal required
+    commissionType CommissionType required
+    description String maxlength(500)
+    effectiveFromDate Instant required
+    effectiveToDate Instant
+    paymentPeriod PaymentPeriod required
+    calculationMethod CalculationMethod required
+    commissionCeiling BigDecimal
+    targetAmount BigDecimal
+    isActive Boolean required
+    termsAndConditions String maxlength(1000)
+    commissionPercentage BigDecimal min(0) max(100)
+}
+
+entity CourierVehicleUsage {
+    courierId UUID required
+    vehicleId UUID required
+    startDate Instant required
+    endDate Instant
+    distanceTraveled Double required min(0)
+    description String maxlength(500)
+    status UsageStatus required
+    usageType UsageType required
+    startTime LocalTime
+    endTime LocalTime
+    startLocation String maxlength(200)
+    endLocation String maxlength(200)
+}
+
+entity CourierWorkShift {
+    courierId UUID required
+    workShiftId UUID required
+    startDate Instant required
+    endDate Instant
+    description String maxlength(500)
+    startLocation String maxlength(200)
+    endLocation String maxlength(200)
+    shiftType WorkShiftType required
+    compensation String maxlength(100)
+    status WorkShiftStatus required
+}
+
+entity Customer {
+    firstName String required maxlength(50)
+    lastName String required maxlength(50)
+    phoneNumber String required maxlength(20)  // Pattern removed (phone validation can be added later)
+    email String maxlength(100)  // Pattern removed (email validation can be added later)
+    gender Gender required
+    customerGroupId UUID
+    cityId UUID
+}
+
+entity CustomerDiscount {
+    customerId UUID required
+    discountCodeId UUID
+    discountPercentage Integer min(0) max(100)
+    discountType DiscountType required
+    startDate Instant required
+    endDate Instant
+    description String maxlength(500)
+    maxUsageCount Integer min(1)
+    usageCount Integer
+    maxDiscountAmount BigDecimal
+    discountAmount BigDecimal
+}
+
+entity CustomerGroup {
+    name String required maxlength(100)
+    description String maxlength(500)
+    defaultDiscountPercentage Integer required min(0) max(100)
+}
+
+entity DeliveryTypePrice {
+    cityId UUID required
+    deliveryType DeliveryType required
+    price BigDecimal required
+    description String maxlength(500)
+    startDate Instant required
+    endDate Instant
+    currency String required maxlength(10)
+}
+
+entity DiscountCode {
+    code String required minlength(5) maxlength(20)
+    discountPercentage Integer min(0) max(100)
+    discountType DiscountType required
+    startDate Instant required
+    endDate Instant
+    description String maxlength(500)
+    maxUsageCount Integer min(1)
+    usageCount Integer
+    maxDiscountAmount BigDecimal
+    minPurchaseAmount BigDecimal
+    discountAmount BigDecimal
+}
+
+entity DistanceMatrix {
+    originAddressId UUID
+    destinationAddressId UUID
+    distance BigDecimal required min(0)
+    duration Integer required min(0)
+    calculationDate Instant required
+    description String maxlength(500)
+    status DistanceMatrixStatus required
+}
+
+entity FinancialTransaction {
+    courierId UUID
+    orderPaymentId UUID
+    amount BigDecimal required
+    transactionType TransactionType required
+    transactionDate Instant required
+    description String maxlength(500)
+    receiptNumber String maxlength(100)
+    paymentMethod PaymentMethod
+    otherInfo String maxlength(500)
+    status TransactionStatus required
+    trackingCode String maxlength(100)
+    bankAccountNumber String maxlength(50)
+    bankName String maxlength(100)
+    bankBranch String maxlength(100)
+    currency String required maxlength(10)
+}
+
+entity Item {
+    name String required maxlength(100)
+    description String maxlength(500)
+    unit String required maxlength(50)
+    unitPrice BigDecimal required
+    inventory Integer required min(0)
+    imageUrl String maxlength(200)
+    categoryId UUID
+}
+
+entity License {
+    courierId UUID required
+    licenseNumber String required maxlength(50)
+    licenseType LicenseType required
+    issueDate Instant required
+    expiryDate Instant
+    description String maxlength(500)
+    imageUrl String maxlength(200)
+    status LicenseStatus required
+}
+
+entity Neighborhood {
+    name String required maxlength(100)
+    description String maxlength(500)
+    cityId UUID required
+    postalCode String required minlength(10) maxlength(10)  // Pattern removed
+    region String maxlength(100)
+    population Integer
+}
+
+entity Order {
+    customerId UUID required
+    orderDate Instant required
+    orderStatus OrderStatus required
+    deliveryType DeliveryType required
+    deliveryAddressId UUID
+    description String maxlength(500)
+    totalAmount BigDecimal required
+    discountAmount BigDecimal
+    paymentMethod PaymentMethod
+    trackingCode String maxlength(100)
+    invoiceNumber String maxlength(100)
+    shippingDate Instant
+    deliveryDate Instant
+    shippingCost BigDecimal
+    totalWeight Double
+}
+
+entity OrderItem {
+    orderId UUID required
+    itemId UUID required
+    quantity Integer required min(1)
+    unitPrice BigDecimal required
+    totalAmount BigDecimal
+    description String maxlength(500)
+}
+
+entity OrderPayment {
+    orderId UUID required
+    amount BigDecimal required
+    paymentMethod PaymentMethod required
+    paymentDate Instant required
+    description String maxlength(500)
+    receiptNumber String maxlength(100)
+    status PaymentStatus required
+    trackingCode String maxlength(100)
+    payerType PaymentPayerType required
+    payerId UUID
+}
+
+entity OrderStatusHistory {
+    orderId UUID required
+    orderStatus OrderStatus required
+    changeDate Instant required
+    description String maxlength(500)
+    changedBy String maxlength(100)
+}
+
+entity PackageType {
+    name String required maxlength(100)
+    description String maxlength(500)
+    maxWeight BigDecimal required min(0)
+    maxWidth BigDecimal required min(0)
+    maxHeight BigDecimal required min(0)
+    packagingCost BigDecimal required
+    sizeUnit String required maxlength(20)
+    weightUnit String required maxlength(20)
+}
+
+entity PaymentMethodPrice {
+    cityId UUID required
+    paymentMethod PaymentMethod required
+    price BigDecimal required
+    description String maxlength(500)
+    startDate Instant required
+    endDate Instant
+    currency String required maxlength(10)
+    valueType PaymentMethodValueType required
+}
+
+entity PricingParameter {
+    cityId UUID required
+    serviceTypePriceId UUID required
+    parameterType PricingParameterType required
+    parameterValue BigDecimal required
+    startDate Instant required
+    endDate Instant
+    description String maxlength(500)
+    unit String maxlength(50)
+    impactFactor BigDecimal required min(0)
+    minValue BigDecimal
+    maxValue BigDecimal
+    calculationType CalculationType required
+}
+
+entity Province {
+    name String required maxlength(100)
+    description String maxlength(500)
+    countyCount Integer
+    cityCount Integer
+    area BigDecimal
+    population Integer
+    website String maxlength(200)  // Pattern removed (URL validation can be added later)
+    mapImageUrl String maxlength(200)
+}
+
+entity ServiceTypePrice {
+    cityId UUID required
+    serviceType ServiceType required
+    price BigDecimal required
+    description String maxlength(500)
+    startDate Instant required
+    endDate Instant
+    currency String required maxlength(10)
+    minValue BigDecimal
+    maxValue BigDecimal
+}
+
+entity Shipment {
+    orderId UUID required
+    courierId UUID
+    deliveryAddressId UUID required
+    trackingNumber String required maxlength(100)
+    shipmentDate Instant required
+    estimatedDeliveryDate Instant
+    actualDeliveryDate Instant
+    shipmentStatus ShipmentStatus required
+    shippingCost BigDecimal required
+    notes String maxlength(500)
+    warehouseId UUID
+}
+
+entity ShipmentItem {
+    shipmentId UUID required
+    orderItemId UUID required
+    quantity Integer required min(1)
+}
+
+entity Vehicle {
+    plateNumber String required  // Pattern removed
+    vehicleType VehicleType required
+    model String maxlength(100)
+    brand String maxlength(100)
+    year Integer min(1900) max(2100)
+    description String maxlength(500)
+    loadCapacity Double
+    engineDisplacement Integer
+    fuelConsumption Double
+    color String maxlength(50)
+    chassisNumber String maxlength(50)
+    engineNumber String maxlength(50)
+    insurance String maxlength(100)
+    imageUrl String maxlength(200)
+    productionDate LocalDate
+    insuranceExpiryDate LocalDate
+    smartCardNumber String maxlength(50)
+    documentNumber String maxlength(50)
+    fuelType FuelType
+    passengerCapacity Integer
+    features String maxlength(500)
+    technicalCondition String maxlength(100)
+    vin String required minlength(17) maxlength(17)
+    mileage Integer
+    documentStatus String maxlength(100)
+    doorCount Integer
+    seatCount Integer
+    gearboxType GearboxType
+    steeringType SteeringType
+    brakeSystemType BrakeSystemType
+    status VehicleStatus required
+}
+
+entity Warehouse {
+    name String required maxlength(100)
+    description String maxlength(500)
+    address String maxlength(200)
+    phone String required maxlength(20) // Pattern removed (phone validation can be added later) - Made phone required as it was in C#
+    code String maxlength(20)
+    managerName String maxlength(100)
+}
+
+entity WorkShift {
+    name String required maxlength(100)
+    startTime LocalTime required
+    endTime LocalTime required
+    description String maxlength(500)
+    daysOfWeek DaysOfWeek required
+    breakDuration Integer required min(0)
+    shiftType WorkShiftType required
+    overtimeRate BigDecimal required
+    shiftOrder Integer required
+    isMandatory Boolean required
+    maxWorkHours Integer required min(0)
+    minWorkHours Integer required min(0)
+    isActive Boolean required
+}
+
+relationship OneToMany {
+    Address{city} to City{addresses}
+    Address{neighborhood} to Neighborhood{addresses}
+    Bank{courierBankAccount} to CourierBankAccount{bank}
+    Category{childCategory} to Category{parentCategory}
+    City{neighborhood} to Neighborhood{city}
+    City{address} to Address{city}
+    City{deliveryTypePrice} to DeliveryTypePrice{city}
+    City{paymentMethodPrice} to PaymentMethodPrice{city}
+    City{serviceTypePrice} to ServiceTypePrice{city}
+    City{pricingParameter} to PricingParameter{city}
+    Courier{courierBankAccount} to CourierBankAccount{courier}
+    Courier{courierDocument} to CourierDocument{courier}
+    Courier{courierPayment} to CourierPayment{courier}
+    Courier{courierVehicleUsage} to CourierVehicleUsage{courier}
+    Courier{license} to License{courier}
+    Courier{courierWorkShift} to CourierWorkShift{courier}
+    Courier{courierEmploymentContract} to CourierEmploymentContract{courier}
+    Courier{courierServiceCommission} to CourierServiceCommission{courier}
+    Courier{financialTransaction} to FinancialTransaction{courier}
+    CustomerGroup{customer} to Customer{customerGroup}
+    Customer{address} to Address{customer}
+    Customer{order} to Order{customer}
+    Customer{customerDiscount} to CustomerDiscount{customer}
+    DiscountCode{customerDiscount} to CustomerDiscount{discountCode}
+    Item{orderItem} to OrderItem{item}
+    Neighborhood{address} to Address{neighborhood}
+    Order{orderPayment} to OrderPayment{order}
+    Order{orderItem} to OrderItem{order}
+    Order{orderStatusHistory} to OrderStatusHistory{order}
+    Order{shipment} to Shipment{order}
+    PackageType{shipmentItem} to ShipmentItem{packageType} // Assuming PackageType is related to ShipmentItem, adjust if needed
+    Province{city} to City{province}
+    Shipment{shipmentItem} to ShipmentItem{shipment}
+    Vehicle{courierVehicleUsage} to CourierVehicleUsage{vehicle}
+    Warehouse{shipment} to Shipment{warehouse}
+    WorkShift{courierWorkShift} to WorkShift{workShift}
+    Order{deliveryAddress} to Address{ordersAsDelivery}
+    Shipment{deliveryAddress} to Address{shipmentsAsDelivery}
+    ServiceTypePrice{pricingParameter} to PricingParameter{serviceTypePrice}
+}
+
+relationship ManyToOne {
+    PricingParameter{serviceTypePrice} to ServiceTypePrice
+}
+
+// Set options if needed, like pagination, dto, service layer, etc.
+// options * {
+//   dto * mapstruct
+//   serviceClass * serviceImpl
+//   pagination pagination
+// }
